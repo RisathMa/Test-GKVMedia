@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gothami School's Media Unit</title>
+
+    <style>
+        /* Previous styles remain the same */
+
+        /* Add these new styles */
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Add overlay if needed */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+    </style>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            height: 100px;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between; /* Keeps logo and nav-links separate */
+            align-items: center;
+            padding: 1rem 0;
+            position: relative; /* Needed for absolute positioning of logo */
+        }
+
+        /* --- NEW LOGO STYLES --- */
+        .logo {
+            transform: translateY(50px);
+            transform: translateX(520px);
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+            z-index: 10; /* Ensure logo is above other elements if they overlap */
+           
+           
+        }
+
+        .logo-img { /* Class added to the <img> tag in HTML */
+            width: 120px; /* Adjust this size as needed for your logo */
+            height: 120px; /* Keep height equal to width for a perfect circle */
+        }
+        /* --- END NEW LOGO STYLES --- */
+
+
+        .nav-links {
+            transform: translateY(-10px);
+            font-size: 20px;
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            padding-left: 200px; /* Example: push links away from center if logo is large */
+            padding-right: 300px; /* Example: push links away from center if logo is large */
+            width: 100%; /* Important for justify-content: space-between on nav */
+            justify-content: space-between; /* Distribute links */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            min-height: 100vh;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        .section-title2 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 3rem;
+            color: #000000;
+            position: relative;
+        }
+
+        .section-title2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Socities Section */
+        .societies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .society {
+            background: linear-gradient(135deg, #cad369 0%, #2c7b7b 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .society:hover {
+            transform: translateY(-5px);
+        }
+
+        .society h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #0b4d71;
+            text-align: center;
+        }
+        .society h4 {
+            font-size: 20px;
+            margin-bottom: 1.5rem;
+            color: #0d2f47;
+            text-align: center;
+        }
+        .members {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .member {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .member:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .member-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .member-info p {
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Services Section */
+        .services {
+            background: linear-gradient(135deg, #153035 0%, #146167 100%);
+            color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: #f8f9fa;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .portfolio-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: start;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                /* Reset padding for mobile */
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* Adjust logo positioning for mobile if needed, or hide it if it clashes */
+            .logo {
+                 transform: translateX(140px);/* Back to normal flow or left-aligned */
+                
+                
+                /* You might want a smaller logo on mobile */
+                /* width: 40px; height: 40px; */
+                /* If you want it left-aligned on mobile: */
+               
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .societies {
+                grid-template-columns: 1fr;
+            }
+
+            .society {
+                min-width: auto;
+            }
+
+            .member {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .member-photo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .society {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Add audio element for background music -->
+    <audio id="bg-music" autoplay loop hidden>
+        <source src="Background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <header>
+        <nav class="container">
+
+            <a href="#" class="logo">
+                <img src="untitled-3-modified (1).png" alt="Media Unit Logo" class="logo-img">
+                    </a>
+           
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#contact">Gallery</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <!-- Video Background -->
+        <video class="video-background" autoplay muted loop playsinline>
+            <source src="Mixture Original.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        
+        <div class="hero-content">
+            <h1>ගෝතමී විද්‍යාලය</h1>
+            <h2>ගම්පහ</h2>
+            <p>පාසල තුළ ඇති ප්‍රධන සංගමය මෙය වේ</p>
+            <a href="#" class="cta-button">Our Work</a>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <section class="section" id="societies">
+            <div class="container">
+                <h2 class="section-title">අප තුළ ඇති සංගම්</h2>
+                <div class="societies">
+                    <div class="society">
+                        <h3>Camera Society</h3>
+                        <h4>කාච ඡයාරූප සංගමය</h4>
+                        <div class="members">
+                            <div class="member">
+                                <div class="member-photo">JP</div>
+                                <div class="member-info">
+                                    <h4>John Parker</h4>
+                                    <p>President</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">SM</div>
+                                <div class="member-info">
+                                    <h4>Sarah Mitchell</h4>
+                                    <p>Vice President</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">AJ</div>
+                                <div class="member-info">
+                                    <h4>Alex Johnson</h4>
+                                    <p>Senior Photographer</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">EW</div>
+                                <div class="member-info">
+                                    <h4>Emma Wilson</h4>
+                                    <p>Video Specialist</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">MB</div>
+                                <div class="member-info">
+                                    <h4>Mike Brown</h4>
+                                    <p>Equipment Manager</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="society">
+                        <h3>Announcement Society</h3>
+                        <h4>නිවේදන සංගමය</h4>
+                        <div class="members">
+                            <div class="member">
+                                <div class="member-photo">LT</div>
+                                <div class="member-info">
+                                    <h4>Lisa Thompson</h4>
+                                    <p>President</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">RG</div>
+                                <div class="member-info">
+                                    <h4>Robert Garcia</h4>
+                                    <p>Vice President</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">NK</div>
+                                <div class="member-info">
+                                    <h4>Nina Kumar</h4>
+                                    <p>Content Creator</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">DL</div>
+                                <div class="member-info">
+                                    <h4>David Lee</h4>
+                                    <p>Audio Specialist</p>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-photo">JD</div>
+                                <div class="member-info">
+                                    <h4>Jessica Davis</h4>
+                                    <p>Script Writer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section services" id="services">
+            <div class="container">
+                <h2 class="section-title">අපගේ සේවාවන්</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"></div>
+                        <h3>ඩ්‍රෝන ආශ්‍රිත ඡායාරූපකරණය</h3>
+                        <p>ඉතා ඉහල තාක්ෂණය යොදා සිදුකිරීම්</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"></div>
+                        <h3>ඡායාරූපකරණය</h3>
+                        <p>ඉතා උසස් තත්ත්වයේ ඡායාරූපකරණය</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon"></div>
+                        <h3>නිවේදනයන්</h3>
+                        <p>පාසලේ සිදුවන සියලුම දේ ප්‍රවාහරනය කරන මාධ්‍යයකි</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="portfolio">
+            <div class="container">
+                <h2 class="section-title2">අපගේ පාසලට ඇති සේවය</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Click on any album to view our work</p>
+                <div class="portfolio-grid">
+                    
+                    <div class="portfolio-item" onclick="openPortfolio('events')">
+                        <div class="portfolio-image">🎉</div>
+                        <div class="portfolio-info">
+                            <h3>School Events</h3>
+                            <p>Photos and videos from various school events, celebrations, and activities</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" onclick="openPortfolio('sports')">
+                        <div class="portfolio-image">⚽</div>
+                        <div class="portfolio-info">
+                            <h3>Sports Coverage</h3>
+                            <p>Action shots and highlights from school sports events and competitions</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" onclick="openPortfolio('graduation')">
+                        <div class="portfolio-image">🎓</div>
+                        <div class="portfolio-info">
+                            <h3>Graduation Ceremonies</h3>
+                            <p>Professional coverage of graduation ceremonies and academic achievements</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2025 Gothami School Media Unit. All rights reserved.</p>
+            <p>Contact Me: Risath@companyrm.lk | (+94)702048067</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Portfolio navigation function
+        function openPortfolio(category) {
+            // Store the selected category in sessionStorage for the portfolio page
+            const portfolioData = {
+                events: {
+                    title: 'School Events',
+                    photos: [
+                        { title: 'Annual Day 2024', date: '2024-03-15' },
+                        { title: 'Science Fair', date: '2024-02-20' },
+                        { title: 'Cultural Festival', date: '2024-01-10' }
+                    ],
+                    videos: [
+                        { title: 'Annual Day Highlights', date: '2024-03-15' },
+                        { title: 'Science Fair Documentary', date: '2024-02-20' }
+                    ]
+                },
+                sports: {
+                    title: 'Sports Coverage',
+                    photos: [
+                        { title: 'Basketball Championship', date: '2024-03-01' },
+                        { title: 'Track and Field', date: '2024-02-15' },
+                        { title: 'Swimming Competition', date: '2024-01-20' }
+                    ],
+                    videos: [
+                        { title: 'Basketball Finals', date: '2024-03-01' },
+                        { title: 'Track Meet Highlights', date: '2024-02-15' }
+                    ]
+                },
+                graduation: {
+                    title: 'Graduation Ceremonies',
+                    photos: [
+                        { title: 'Class of 2024', date: '2024-05-20' },
+                        { title: 'Honor Society Induction', date: '2024-04-15' }
+                    ],
+                    videos: [
+                        { title: 'Graduation Ceremony', date: '2024-05-20' },
+                        { title: 'Valedictorian Speech', date: '2024-05-20' }
+                    ]
+                },
+                drone: {
+                    title: 'Drone Footage',
+                    photos: [
+                        { title: 'Campus Overview', date: '2024-04-01' },
+                        { title: 'Sports Field Aerial', date: '2024-03-10' }
+                    ],
+                    videos: [
+                        { title: 'Campus Tour', date: '2024-04-01' },
+                        { title: 'Event Aerial Coverage', date: '2024-03-10' }
+                    ]
+                },
+                announcements: {
+                    title: 'Daily Announcements',
+                    videos: [
+                        { title: 'Morning Announcements - Week 1', date: '2024-05-20' },
+                        { title: 'Special Event Announcement', date: '2024-05-15' },
+                        { title: 'Sports Update', date: '2024-05-10' }
+                    ]
+                },
+                promotional: {
+                    title: 'Promotional Videos',
+                    videos: [
+                        { title: 'School Introduction', date: '2024-04-01' },
+                        { title: 'Department Showcase', date: '2024-03-15' },
+                        { title: 'Student Life', date: '2024-02-28' }
+                    ]
+                }
+            };
+
+            // Create portfolio page content
+            let portfolioHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${portfolioData[category].title} - Media Unit Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .content-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .media-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .media-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .media-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .no-content {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+`;
+            portfolioHtml += `
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">&larr; Back to Home</a>
+            <h1>${portfolioData[category].title}</h1>
+            <p class="subtitle">A collection of our best work in ${portfolioData[category].title.toLowerCase()}.</p>
+        </div>
+        <div class="content-grid">
+`;
+
+            if (portfolioData[category].photos && portfolioData[category].photos.length > 0) {
+                portfolioHtml += `
+            <div class="section">
+                <h2>Photos</h2>
+                <div class="media-grid">
+`;
+                portfolioData[category].photos.forEach(item => {
+                    portfolioHtml += `
+                    <div class="media-item">
+                        <div class="media-icon">📸</div>
+                        <div class="media-title">${item.title}</div>
+                        <div class="media-date">Date: ${item.date}</div>
+                    </div>
+`;
+                });
+                portfolioHtml += `
+                </div>
+            </div>
+`;
+            } else {
+                portfolioHtml += `
+            <div class="section">
+                <h2>Photos</h2>
+                <p class="no-content">No photos available for this category yet.</p>
+            </div>
+`;
+            }
+
+            if (portfolioData[category].videos && portfolioData[category].videos.length > 0) {
+                portfolioHtml += `
+            <div class="section">
+                <h2>Videos</h2>
+                <div class="media-grid">
+`;
+                portfolioData[category].videos.forEach(item => {
+                    portfolioHtml += `
+                    <div class="media-item">
+                        <div class="media-icon">▶️</div>
+                        <div class="media-title">${item.title}</div>
+                        <div class="media-date">Date: ${item.date}</div>
+                    </div>
+`;
+                });
+                portfolioHtml += `
+                </div>
+            </div>
+`;
+            } else {
+                portfolioHtml += `
+            <div class="section">
+                <h2>Videos</h2>
+                <p class="no-content">No videos available for this category yet.</p>
+            </div>
+`;
+            }
+
+            portfolioHtml += `
+        </div>
+    </div>
+</body>
+</html>
+`;
+            const newWindow = window.open();
+            newWindow.document.write(portfolioHtml);
+            newWindow.document.close();
+        }
+    </script>
+
+ <script>
+        // Previous JavaScript remains the same
+
+        // Auto-play music with user interaction workaround
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('bg-music');
+            audio.muted = false; // Unmute after initial interaction
+            
+            // Enable audio after any user interaction
+            document.body.addEventListener('click', function() {
+                audio.play().catch(() => {
+                    // Handle error if needed
+                });
+            }, { once: true });
+        });
+
+        // Force video to play programmatically
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.video-background');
+            video.play().catch(error => {
+                console.log('Video autoplay failed:', error);
+            });
+        });
+    </script>
+
+</body>
+</html>
